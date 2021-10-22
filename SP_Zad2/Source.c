@@ -20,8 +20,8 @@ int InsertAfter(Position position, Position newPerson);						// dodavanje elemen
 int InsertBefore(Position head, Position position, Position newPerson);
 Position FindLast(Position head);											// pronalaženje zadnjeg elementa
 Position FindBySurname(Position first, char* surname);						// pronalaženje po prezimenu
-Position FindBefore(Position head, Position position);						// pronalaženje prethodnog elementa zadanog elementa
-int DeleteAfter(Position first);											// brisanje elementa nakon zadanog elementa
+Position FindBefore(Position first, Position position);						// pronalaženje prethodnog elementa zadanog elementa
+int DeleteAfter(Position head, Position position);												// brisanje elementa nakon zadanog elementa
 
 
 
@@ -107,7 +107,7 @@ int InsertAfter(Position position, Position newPerson)
 int InsertBefore(Position head, Position position, Position newPerson)
 {
 	Position temp = head;
-	while ((temp->next != position) || (temp->next != NULL)) {
+	while ((temp->next != NULL) && (temp->next != position)) {
 		temp = temp->next;
 	}
 
@@ -136,21 +136,31 @@ Position FindBySurname(Position first, char* surname)
 	return NULL;
 }
 
-Position FindBefore(Position head, Position position)
+Position FindBefore(Position first, Position position)
 {
-	Position temp = head;
-	while ((temp->next != position) || (temp->next != NULL)) {
+	Position temp = first;
+	while ((temp->next != NULL) && (temp->next != position)) {
 		temp = temp->next;
 	}
-	return temp;
+	if (temp->next == NULL) {
+		return NULL;
+	} else {
+		return temp;
+	}
 }
 
-int DeleteAfter(Position first)
+int DeleteAfter(Position head, Position position)
 {
-	Position temp = first->next;
+		Position temp = head;
 
-	temp = temp->next;
-	free(first->next);
+		while ((temp != position) && (temp->next != NULL)) {
+			temp = temp->next;
+		}
+		if (temp->next == NULL) {
+			return "No element to delete!";
+		}
+		temp = (temp->next)->next;
+		free(position);
 
-	return EXIT_SUCCESS;
+		return EXIT_SUCCESS;
 }
