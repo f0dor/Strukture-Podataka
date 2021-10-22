@@ -17,6 +17,7 @@ int AppendList(Position head, char* name, char* surname, int birthYear);	// doda
 int PrintList(Position first);												// ispisivanje liste
 Position CreatePerson(char* name, char* surname, int birthYear);			// stvaranje novih elemenata
 int InsertAfter(Position position, Position newPerson);						// dodavanje elemenata nakon zadanog elementa
+int InsertBefore(Position head, Position position, Position newPerson);
 Position FindLast(Position head);											// pronalaženje zadnjeg elementa
 Position FindBySurname(Position first, char* surname);						// pronalaženje po prezimenu
 Position FindBefore(Position head, Position position);						// pronalaženje prethodnog elementa zadanog elementa
@@ -103,6 +104,18 @@ int InsertAfter(Position position, Position newPerson)
 	return EXIT_SUCCESS;
 }
 
+int InsertBefore(Position head, Position position, Position newPerson)
+{
+	Position temp = head;
+	while ((temp->next != position) || (temp->next != NULL)) {
+		temp = temp->next;
+	}
+
+	newPerson->next = temp->next;
+	temp->next = newPerson;
+	return EXIT_SUCCESS;;
+}
+
 Position FindLast(Position head)
 {
 	Position temp = head;
@@ -126,7 +139,7 @@ Position FindBySurname(Position first, char* surname)
 Position FindBefore(Position head, Position position)
 {
 	Position temp = head;
-	while (temp->next != position) {
+	while ((temp->next != position) || (temp->next != NULL)) {
 		temp = temp->next;
 	}
 	return temp;
