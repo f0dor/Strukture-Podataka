@@ -1,4 +1,2 @@
 ﻿  Source.c
-C:\Users\Marko Šimić\source\repos\SP_Zad2\Source.c(38,9): warning C4477: 'scanf' : format string '%d' requires an argument of type 'int *', but variadic argument 3 has type 'int'
-C:\Users\Marko Šimić\source\repos\SP_Zad2\Source.c(98,12): warning C4047: 'return': 'Position' differs in levels of indirection from 'int'
   SP_Zad2.vcxproj -> C:\Users\Marko Šimić\source\repos\SP_Zad2\Debug\SP_Zad2.exe

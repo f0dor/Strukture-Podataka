@@ -21,14 +21,46 @@ int InsertBefore(Position head, Position position, Position newPerson);
 Position FindLast(Position head);											// pronalaženje zadnjeg elementa
 Position FindBySurname(Position first, char* surname);						// pronalaženje po prezimenu
 Position FindBefore(Position first, Position position);						// pronalaženje prethodnog elementa zadanog elementa
-int DeleteAfter(Position head, Position position);												// brisanje elementa nakon zadanog elementa
+int DeleteAfter(Position head, Position position);							// brisanje elementa nakon zadanog elementa
 
 
 
-int main(int argc, char** argv) {
+int main() {
 
 	Person Head = { .next = NULL, .name = {0}, .surname = {0}, .birthYear = 0 };
 	Position p = &Head;
+
+	char ime[MAX_SIZE] = "Marko";
+	char prezime[MAX_SIZE] = "Simic";
+	int godina = 2000;
+
+	char ime1[MAX_SIZE] = "Ante";
+	char prezime1[MAX_SIZE] = "Petrovic";
+	int godina1 = 2002;
+
+	char ime2[MAX_SIZE] = "Sveto";
+	char prezime2[MAX_SIZE] = "Karamatic";
+	int godina2 = 1998;
+
+	char ime3[MAX_SIZE] = "Josip";
+	char prezime3[MAX_SIZE] = "Vukas";
+	int godina3 = 1998;
+
+	char ime4[MAX_SIZE] = "Petar";
+	char prezime4[MAX_SIZE] = "Latinac";
+	int godina4 = 1996;
+
+	AppendList(p, ime, prezime, godina);
+	AppendList(p, ime1, prezime1, godina1);
+	AppendList(p, ime2, prezime2, godina2);
+	
+	PrintList(p->next);
+
+	// DeleteAfter(p, p->next);												testiranje brise li uspjesno element
+	// InsertAfter(p->next, CreatePerson(ime3, prezime3, godina3));			testiranje dodaje li uspjesno element nakon odreðenog elementa
+	// InsertBefore(p, p->next, CreatePerson(ime4, prezime4, godina4));		testiranje dodaje li uspjesno element prije odreðenog elementa
+
+	PrintList(p->next);
 	
 	return EXIT_SUCCESS;
 }
@@ -70,8 +102,8 @@ int PrintList(Position first)
 {
 	Position temp = first;
 
-	while (temp) {
-		printf("Name: %s, surname: %s, birthyear: %d\n", temp->name, temp->surname, temp->birthYear);
+	while (temp != NULL) {
+		printf("Name: %s\nSurname: %s\nBirthyear: %d\n\n", temp->name, temp->surname, temp->birthYear);
 		temp = temp->next;
 	}
 
@@ -85,7 +117,7 @@ Position CreatePerson(char* name, char* surname, int birthYear)
 	newPerson = (Position)malloc(sizeof(Person));
 	if (!newPerson) {
 		perror("Can't allocate memory!\n");
-		return -1;
+		return NULL;
 	}
 
 	strcpy(newPerson->name, name);
@@ -120,7 +152,14 @@ Position FindLast(Position head)
 {
 	Position temp = head;
 
-	while (temp->next) {}
+	if (temp->next == NULL) {
+		return head;
+	}
+
+	while (temp->next) {
+		temp = temp->next;
+	}
+
 
 	return temp;
 }
@@ -152,15 +191,18 @@ Position FindBefore(Position first, Position position)
 int DeleteAfter(Position head, Position position)
 {
 		Position temp = head;
-
-		while ((temp != position) && (temp->next != NULL)) {
+		Position q;
+		
+		while ((temp->next) && (temp != position)) {
 			temp = temp->next;
 		}
-		if (temp->next == NULL) {
-			return "No element to delete!";
-		}
-		temp = (temp->next)->next;
-		free(position);
 
-		return EXIT_SUCCESS;
+		if (temp->next == NULL) {
+			return -2;
+		} else {
+			q = temp->next;
+			temp->next = (temp->next)->next;
+			free(q);
+			return EXIT_SUCCESS;
+		}
 }
