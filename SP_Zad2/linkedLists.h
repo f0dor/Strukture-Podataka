@@ -11,6 +11,7 @@ typedef struct _Person {
 	Position next;
 }Person;
 
+int Input(Position head);
 int PrependList(Position head, char* name, char* surname, int birthYear);	// dodavanje elemenata na pocetak liste
 int AppendList(Position head, char* name, char* surname, int birthYear);	// dodavanje elemenata na kraj liste
 int PrintList(Position first);												// ispisivanje liste
@@ -18,8 +19,9 @@ Position CreatePerson(char* name, char* surname, int birthYear);			// stvaranje 
 int InsertAfter(Position position, Position newPerson);						// dodavanje elementa nakon zadanog elementa
 int InsertBefore(Position head, Position position, Position newPerson);		// dodavanje elementa prije zadanog elementa
 Position FindLast(Position head);											// pronalaženje zadnjeg elementa
+int CountList(Position head);												// pronadji broj clanova liste
 Position FindBySurname(Position first, char* surname);						// pronalaženje po prezimenu
 Position FindBefore(Position first, Position position);						// pronalaženje prethodnog elementa zadanog elementa
-int DeleteAfter(Position head, Position position);							// brisanje elementa nakon zadanog elementa
+int DeleteAfter(Position position);							// brisanje elementa nakon zadanog elementa
 
 #endif
