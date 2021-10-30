@@ -25,6 +25,7 @@ Position FindBySurname(Position first, char* surname);						// pronalaženje po p
 Position FindBefore(Position first, Position position);						// pronalaženje prethodnog elementa zadanog elementa
 int DeleteAfter(Position position);											// brisanje elementa nakon zadanog elementa
 int SortBySurname(Position head);
+int SortedInput(Position head, Position newPerson);
 int ReadFromFile(Position head);
 int WriteToFile(Position head);
 

@@ -13,8 +13,6 @@ int main() {
 
 	InputFromConsole(p);
 	PrintList(p->next);
-	SortBySurname(p);
-	PrintList(p->next);
 
 	return EXIT_SUCCESS;
 }

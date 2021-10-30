@@ -10,6 +10,7 @@ int InputFromConsole(Position head)
 	char surname[MAX_SIZE] = { 0 };
 	int birthYear = 0;
 	Position p = head;
+	Position newPerson = NULL;
 
 	printf("Koliko clanova liste zelite unijeti?\n");
 	if (((scanf(" %d", &n)) != 1)) {
@@ -23,7 +24,8 @@ int InputFromConsole(Position head)
 			printf("\nKrivo uneseni podatci!\n");
 			return -10;
 		}
-		AppendList(p, name, surname, birthYear);
+		newPerson = CreatePerson(name, surname, birthYear);
+		SortedInput(head, newPerson);
 	}
 
 	return EXIT_SUCCESS;
@@ -209,10 +211,40 @@ int SortBySurname(Position head)
 	return EXIT_SUCCESS;
 }
 
+int SortedInput(Position head, Position newPerson)
+{
+	Position temp = head;
+
+	if (temp->next == NULL) {
+		InsertAfter(head, newPerson);
+	} else if(temp->next->next == NULL) {
+			if (strcmp(newPerson->surname, temp->next->surname) > 0) {
+				InsertAfter(temp->next, newPerson);
+			} else {
+				InsertBefore(head, temp->next, newPerson);
+			}
+	} else {
+		while (temp->next->next != NULL) {
+			if (strcmp(newPerson->surname, temp->next->surname) < 0) {
+				InsertBefore(head, temp->next, newPerson);
+				break;
+			} else if ((strcmp(newPerson->surname, temp->next->surname) > 0) && (strcmp(newPerson->surname, temp->next->next->surname) < 0)){
+				InsertAfter(temp->next, newPerson);
+				break;
+			} else {
+				temp = temp->next;
+			}
+		}
+	}
+
+	return EXIT_SUCCESS;
+}
+
 int ReadFromFile(Position head)
 {
 	FILE* f = NULL;
 	Position temp = head->next;
+	Position newPerson = NULL;
 	char file[MAX_SIZE] = { 0 };
 	char name[MAX_SIZE] = { 0 };
 	char surname[MAX_SIZE] = { 0 };
@@ -250,7 +282,8 @@ int ReadFromFile(Position head)
 		if (flag != 3) {
 			continue;
 		} else {
-			AppendList(head, name, surname, birthYear);
+			newPerson = CreatePerson(name, surname, birthYear);
+			SortedInput(head, newPerson);
 		}
 	}
 	return EXIT_SUCCESS;
