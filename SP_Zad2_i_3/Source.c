@@ -11,6 +11,9 @@ int main() {
 	Person Head = { .next = NULL, .name = {0}, .surname = {0}, .birthYear = 0 };
 	Position p = &Head;
 
+	// ReadFromFile(p);
+	// PrintList(p->next);
+
 	InputFromConsole(p);
 	PrintList(p->next);
 
