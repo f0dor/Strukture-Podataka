@@ -17,5 +17,7 @@ int main() {
 	InputFromConsole(p);
 	PrintList(p->next);
 
+	ReadFromFile(p);
+
 	return EXIT_SUCCESS;
 }
