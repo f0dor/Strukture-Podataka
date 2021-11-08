@@ -1,2 +1,3 @@
-﻿  Source.c
+﻿  Polinom.c
+C:\Users\Marko Šimić\source\repos\SP_Zad4\Polinom.c(67,1): warning C4047: 'initializing': 'char *' differs in levels of indirection from 'char (*)[1024]'
   SP_Zad4.vcxproj -> C:\Users\Marko Šimić\source\repos\SP_Zad4\Debug\SP_Zad4.exe
