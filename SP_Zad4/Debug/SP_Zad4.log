@@ -1,5 +1,5 @@
 ﻿  Polinom.c
 C:\Users\Marko Šimić\source\repos\SP_Zad4\Polinom.c(212,1): warning C4029: declared formal parameter list different from definition
 C:\Users\Marko Šimić\source\repos\SP_Zad4\Polinom.c(90): warning C4716: 'MultiplyPoly': must return a value
-C:\Users\Marko Šimić\source\repos\SP_Zad4\Polinom.c(255): warning C4715: 'PrintList': not all control paths return a value
+C:\Users\Marko Šimić\source\repos\SP_Zad4\Polinom.c(282): warning C4715: 'PrintList': not all control paths return a value
   SP_Zad4.vcxproj -> C:\Users\Marko Šimić\source\repos\SP_Zad4\Debug\SP_Zad4.exe

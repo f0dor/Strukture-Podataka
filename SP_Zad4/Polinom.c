@@ -226,13 +226,39 @@ int PrintList(Position head, char* name)
 			}else {
 				printf("x^%d", p->exp);
 			}
-		}
-		else if (p->coef < 0 && p == head->next) {
+		} else if (p->coef < 0 && p == head->next) {
 			if (abs(p->coef) != 1) {
 				printf("-%dx^%d", p->coef, p->exp);
 			}
 			else {
 				printf("-x^%d", p->exp);
+			}
+		} else if (p->exp == 0 && p->coef < 0 && p == head->next) {
+			if (abs(p->coef) != 1) {
+				printf("-%d", abs(p->coef));
+			} else {
+				printf("-1");
+			}
+		} else if (p->exp == 0 && p->coef > 0 && p == head->next) {
+			if (p->coef != 1) {
+				printf("%d", p->coef);
+			}
+			else {
+				printf("1");
+			}
+		} else if (p->exp == 0 && p->coef < 0 && p != head->next) {
+			if (abs(p->coef) != 1) {
+				printf(" - %d", abs(p->coef));
+			}
+			else {
+				printf(" - 1");
+			}
+		} else if (p->exp == 0 && p->coef > 0 && p != head->next) {
+			if (p->coef != 1) {
+				printf(" + %d", p->coef);
+			}
+			else {
+				printf(" + 1");
 			}
 		} else if (p->coef > 0 && p != head->next) {
 			if (p->coef != 1) {
