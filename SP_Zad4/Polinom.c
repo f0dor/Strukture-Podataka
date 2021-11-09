@@ -21,18 +21,101 @@ Position newPoly(int coef, int exp)
 	return NewPoly;
 }
 
+int AddPoly(Position head1, Position head2, Position result)
+{
+	Position temp1 = head1;
+	Position temp2 = head2;
+	int tmp = 0;
+	int flag = 0;
+
+	while (temp1->next != NULL) {
+		while (temp2->next != NULL) {
+			if (temp1->next->exp == temp2->next->exp) {
+				tmp = temp1->next->coef + temp2->next->coef;
+				SortedInput(result, newPoly(tmp, temp1->next->exp));
+				temp2 = temp2->next;
+				break;
+			} else if (temp1->next->exp != temp2->next->exp) {
+				flag = 1;
+			} else {
+				flag = 2;
+			}
+			temp2 = temp2->next;
+		}
+		if (flag == 1) {
+			SortedInput(result, newPoly(temp1->next->coef, temp1->next->exp));
+		}
+		temp1 = temp1->next;
+	}
+
+	temp1 = head1;
+	temp2 = head2;
+	flag = 0;
+
+	while (temp2->next != NULL) {
+		while (temp1->next != NULL) {
+			if (temp2->next->exp == temp1->next->exp) {
+				temp1 = temp1->next;
+				break;
+			} else if (temp2->next->exp != temp1->next->exp) {
+				flag = 1;
+			}
+			temp1 = temp1->next;
+		}
+		if (flag == 1) {
+			SortedInput(result, newPoly(temp2->next->coef, temp2->next->exp));
+		}
+		temp2 = temp2->next;
+	}
+
+	return EXIT_SUCCESS;
+}
+
+int MultiplyPoly(Position head1, Position head2, Position result)
+{
+	Position temp1 = head1;
+	Position temp2 = head2;
+	int tmp1 = 0, tmp2 = 0;
+
+	while (temp1->next != NULL) {
+		while (temp2->next != NULL) {
+			tmp1 = temp1->next->coef * temp2->next->coef;
+			tmp2 = temp1->next->exp + temp2->next->exp;
+			SortedInput(result, newPoly(tmp1, tmp2));
+			temp2 = temp2->next;
+		}
+		temp2 = head2;
+		temp1 = temp1->next;
+	}
+}
+
+int MergeAfter(Position position, Position newPoly)
+{
+	if (position->next == NULL || position->next->exp != newPoly->exp) {
+		InsertAfter(position, newPoly);
+	} else {
+		int tmp = newPoly->coef + position->next->coef;
+		if (tmp == 0) {
+			DeleteAfter(position);
+		} else {
+			position->next->coef = tmp;
+		}
+		free(newPoly);
+	}
+
+	return EXIT_SUCCESS;
+}
+
 int SortedInput(Position head, Position newPoly)
 {
 	Position temp = head;
 
-	while (temp->next != NULL) {
+	while (temp->next != NULL && newPoly->exp < temp->next->exp) {
 		temp = temp->next;
-		if (newPoly->exp > temp->next->exp) {
-			InsertAfter(temp, newPoly);
-			break;
-		}
 	}
 
+	MergeAfter(temp, newPoly);
+	
 	return EXIT_SUCCESS;
 }
 
@@ -58,15 +141,31 @@ int InsertBefore(Position head, Position position, Position newPoly)
 	return EXIT_SUCCESS;
 }
 
+int DeleteAfter(Position position)
+{
+	Position temp = position;
+	Position q = NULL;
+
+	if (temp->next == NULL) {
+		return -2;
+	}
+	else {
+		q = temp->next;
+		temp->next = q->next;
+		free(q);
+		return EXIT_SUCCESS;
+	}
+}
+
 int ReadFromFile(Position head1, Position head2)
 {
 	FILE* f = NULL;
 	Position temp = NULL;
 	char buffer[MAX_LINE] = { 0 };
 	char fileName[MAX_SIZE] = { 0 };
-	char* p = &buffer;
+	char* p = buffer;
 	int exp = 0, coef = 0;
-	int flag = 0, n = 0;
+	int flag = 0, n = 0, i = 0;
 
 
 	printf("Unesite naziv datoteke (npr. polinom.txt ): \n");
@@ -82,49 +181,77 @@ int ReadFromFile(Position head1, Position head2)
 		return EXIT_FAILURE;
 	}
 
-	while (!feof(f)) {
-		flag = fscanf(f, " %d %d", &coef, &exp);
-		if (flag == 2) {
-			n++;
+	fgets(buffer, MAX_LINE, f);
+	while (strlen(p) > 0) {
+		if (flag = sscanf(p, " %d %d %n", &coef, &exp, &n) != 2) {
+			p += n;
+			continue;
 		}
+
+		SortedInput(head1, newPoly(coef, exp));
+		p += n;
 	}
 
-	if (n <= 0) {
-		printf("Prazna datoteka!\n");
-		return EXIT_FAILURE;
-	}
-
-	rewind(f);
-
-	temp = head1;
-	while (!feof(f)) {
-		fgets(buffer, MAX_LINE, f);
-		while (strlen(buffer) > 0) {
-			if (flag = sscanf(buffer, " %d %d %n", &coef, &exp, &n) != 2) {
-				p += n;
-				continue;
-			} else {
-				InsertAfter(temp, newPoly(coef, exp));
-				p += n;
-			}
+	fgets(buffer, MAX_LINE, f);
+	p = buffer;
+	while (strlen(p) > 0) {
+		if (flag = sscanf(p, " %d %d %n", &coef, &exp, &n) != 2) {
+			p += n;
+			continue;
 		}
-		temp = head2;
+
+		SortedInput(head2, newPoly(coef, exp));
+		p += n;
 	}
 
 	fclose(f);
 	return EXIT_SUCCESS;
 }
 
-int PrintList(Position head)
+int PrintList(Position head, char* name)
 {
-	Position temp = head->next;
+	Position temp = head;
+	Position p = temp->next;
 
-	while (temp != NULL) {
-		printf("%dx^%d + ", temp->coef, temp->exp);
-		temp = temp->next;
+	if (!p) {
+		return EXIT_FAILURE;
 	}
 
-	return EXIT_SUCCESS;
+	printf("\n%s = ", name);
+
+	while(p != NULL) {
+		if (p->coef > 0 && p == head->next) {
+			if (p->coef != 1) {
+				printf("%dx^%d", p->coef, p->exp);
+			}else {
+				printf("x^%d", p->exp);
+			}
+		}
+		else if (p->coef < 0 && p == head->next) {
+			if (abs(p->coef) != 1) {
+				printf("-%dx^%d", p->coef, p->exp);
+			}
+			else {
+				printf("-x^%d", p->exp);
+			}
+		} else if (p->coef > 0 && p != head->next) {
+			if (p->coef != 1) {
+				printf(" + %dx^%d", p->coef, p->exp);
+			}
+			else {
+				printf(" + x^%d", p->exp);
+			}
+		} else if (p->coef < 0 && p != head->next) {
+			if (abs(p->coef) != 1) {
+				printf(" - %dx^%d", abs(p->coef), p->exp);
+			}
+			else {
+				printf(" - x^%d", p->exp);
+			}
+		}
+		p = p->next;
+	}
+	printf("\n");
 }
 
 int CountList(Position head)
