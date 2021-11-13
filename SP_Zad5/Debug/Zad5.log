@@ -1,0 +1,4 @@
+﻿  Source.c
+C:\Users\Marko Šimić\source\repos\SP_Zad5\Source.c(1,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+C:\Users\Marko Šimić\source\repos\SP_Zad5\Source.c : message : see previous definition of '_CRT_SECURE_NO_WARNINGS'
+  Zad5.vcxproj -> C:\Users\Marko Šimić\source\repos\SP_Zad5\Debug\SP_Zad5.exe

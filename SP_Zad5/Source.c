@@ -4,9 +4,13 @@
 #include <string.h>
 #include "Stack.h"
 
-int main(int argc, char** argv)
+int main()
 {
+	double result = 0;
 
+	CalculatePostfix(&result, "postfix.txt");
+
+	printf("Calculated value of the postfix expression = %.1f\n", result);
 
 	return EXIT_SUCCESS;
 }

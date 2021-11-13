@@ -129,7 +129,7 @@ int PerformOperation(Position head, char operation)
 int CalculatePostfix(double* destination, char* fileName)
 {
 	FILE* file = NULL;
-	int fileLength = 0;
+	size_t fileLength = 0;
 	char* buffer = NULL;
 	char* currentBuffer = NULL;
 	int numBytes = 0;
@@ -153,7 +153,7 @@ int CalculatePostfix(double* destination, char* fileName)
 		return NULL;
 	}
 
-	rewind(file);
+	fseek(file, 0, SEEK_SET);
 	fread(buffer, sizeof(char), fileLength, file);
 	printf("|%s|\n", buffer);
 	fclose(file);
@@ -180,6 +180,8 @@ int CalculatePostfix(double* destination, char* fileName)
 			currentBuffer += numBytes;
 		}
 	}
+
+	*destination = head.next->number;
 
 	free(buffer);
 	return EXIT_SUCCESS;
