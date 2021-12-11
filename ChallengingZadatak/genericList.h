@@ -14,6 +14,7 @@ int InputFromConsole(ListP head, int type);
 int InsertAfter(ListP position, ListP newElement);
 int InsertBefore(ListP head, ListP position, ListP newElement);
 int SortedInput(ListP head, ListP newElement, int type);
+int PrintList(ListP head, int type);
 
 
 

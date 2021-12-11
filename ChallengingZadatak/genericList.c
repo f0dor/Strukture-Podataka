@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #define MAX_LENGTH 256
 
 
@@ -11,17 +12,29 @@ ListP CreateElement(int type, int integer, char* character, double doub, char* s
 
 	switch (type)
 	{
-	case '1':
-		
+	case 1:
+		newElement = malloc(sizeof(List) + sizeof(int));
+		if (!newElement) {
+			return NULL;
+		}
 		break;
-	case '2':
-		
+	case 2:
+		newElement = malloc(sizeof(List) + sizeof(char));
+		if (!newElement) {
+			return NULL;
+		}
 		break;
-	case '3':
-		
+	case 3:
+		newElement = malloc(sizeof(List) + sizeof(double));
+		if (!newElement) {
+			return NULL;
+		}
 		break;
-	case '4':
-		
+	case 4:
+		newElement = malloc(sizeof(List) + (1 + strlen(string) * sizeof(char)));
+		if (!newElement) {
+			return NULL;
+		}
 		break;
 	default:
 		printf("\n :( Oops! Something went wrong! :(\n");
@@ -46,7 +59,8 @@ int InputType()
 		if (i > 0) {
 			printf("Invalid input! Try again.\n");
 		}
-		i = scanf(" %d", &r);
+		scanf(" %d", &r);
+		i++;
 	} while (r < 1 || r > 4);
 
 	return r;
@@ -61,37 +75,48 @@ int InputFromConsole(ListP head, int type)
 	char character = '\0';
 	char string[MAX_LENGTH] = { 0 };
 	int n = 0, i = 0;
+	int flag = 0;
 
 	printf("\nHow many elements do you want to input?\n");
-	scanf(" %d", &n);
+	flag = scanf(" %d", &n);
 
-	for (i = 0; i < n; i++) {
-		switch (type)
+	switch (type)
 		{
-		case '1':
-			scanf(" %d", &integer);
-			newElement = CreateElement(type, integer, NULL, 0, NULL);
-			
+		case 1:
+			for (i = 0; i < n; i++) {
+				printf("Input %d. element: ", i + 1);
+				flag = scanf(" %d", &integer);
+				newElement = CreateElement(type, integer, NULL, 0, NULL);
+				InsertAfter(head, newElement);
+			}
 			break;
-		case '2':
-			scanf(" %c", &character);
-			newElement = CreateElement(type, 0, &character, 0, NULL);
-
+		case 2:
+			for (i = 0; i < n; i++) {
+				printf("Input %d. element: ", i + 1);
+				flag = scanf(" %c", &character);
+				newElement = CreateElement(type, 0, &character, 0, NULL);
+				InsertAfter(head, newElement);
+			}
 			break;
-		case '3':
-			scanf(" %lf", &doub);
-			newElement = CreateElement(type, 0, NULL, doub, NULL);
-
+		case 3:
+			for (i = 0; i < n; i++) {
+				printf("Input %d. element: ", i + 1);
+				flag = scanf(" %lf", &doub);
+				newElement = CreateElement(type, 0, NULL, doub, NULL);
+				InsertAfter(head, newElement);
+			}
 			break;
-		case '4':
-			scanf(" %s", string);
-			newElement = CreateElement(type, 0, NULL, 0, string);
-
+		case 4:
+			for (i = 0; i < n; i++) {
+				printf("Input %d. element: ", i + 1);
+				flag = scanf(" %s", string);
+				newElement = CreateElement(type, 0, NULL, 0, string);
+				InsertAfter(head, newElement);
+			}
 			break;
 		default:
 			break;
 		}
-	}
 	return EXIT_SUCCESS;
 }
 
@@ -122,6 +147,71 @@ int SortedInput(ListP head, ListP newElement, int type)
 {
 	ListP temp = head;
 
+	switch (type)
+	{
+	case 1:
+		while ( (temp->next != NULL) && (*((int*)(newElement->next + 4)) < *((int*)(newElement->next->next + 4))) ) {
+			temp = temp->next;
+		}
+		InsertAfter(temp, newElement);
+		return EXIT_SUCCESS;
+	case 2:
+		while ( (temp->next != NULL) && ( strcmp(*((char*)(newElement->next + 4)), *((char*)(newElement->next->next + 4)))) > 0 ){
+			temp = temp->next;
+		}
+		InsertAfter(temp, newElement);
+		return EXIT_SUCCESS;
+	case 3:
+		while ((temp->next != NULL) && (*((double*)(newElement->next + 4)) < *((double*)(newElement->next->next + 4)))) {
+			temp = temp->next;
+		}
+		InsertAfter(temp, newElement);
+		return EXIT_SUCCESS;
+	case 4:
+		while ((temp->next != NULL) && ( strcmp(*((char*)(newElement->next + 4)), *((char*)(newElement->next->next + 4)))) > 0 ) {
+			temp = temp->next;
+		}
+		InsertAfter(temp, newElement);
+		return EXIT_SUCCESS;
+	default:
+		break;
+	}
+	return EXIT_FAILURE;
+}
 
-	return 0;
+int PrintList(ListP head, int type)
+{
+	ListP temp = head;
+
+	switch (type)
+	{
+	case 1:
+		while (temp->next != NULL) {
+			printf(" %d ", *((int*)(temp + 4)));
+			temp = temp->next;
+		}
+		break;
+	case 2:
+		while (temp->next != NULL) {
+			printf(" %c ", *((char*)(temp + 4)));
+			temp = temp->next;
+		}
+		break;
+	case 3:
+		while (temp->next != NULL) {
+			printf(" %lf ", *((double*)(temp + 4)));
+			temp = temp->next;
+		}
+		break;
+	case 4:
+		while (temp->next != NULL) {
+			printf(" %s ", ((char*)(temp + 4)));
+			temp = temp->next;
+		}
+		break;
+	default:
+		break;
+	}
+
+	return EXIT_SUCCESS;
 }
