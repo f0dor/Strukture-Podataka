@@ -8,7 +8,7 @@
 
 ListP CreateElement(int type, int integer, char* character, double doub, char* string)
 {
-	ListP newElement = NULL;
+	void* newElement = NULL;
 
 	switch (type)
 	{
@@ -17,6 +17,9 @@ ListP CreateElement(int type, int integer, char* character, double doub, char* s
 		if (!newElement) {
 			return NULL;
 		}
+		//((ListP)newElement) = NULL;
+		*(((int*)newElement) + 4) = integer;
+		printf(" %d \n", *(((int*)newElement)+4));
 		break;
 	case 2:
 		newElement = malloc(sizeof(List) + sizeof(char));
@@ -41,7 +44,7 @@ ListP CreateElement(int type, int integer, char* character, double doub, char* s
 		break;
 	}
 
-	return newElement;
+	return (ListP)newElement;
 }
 
 int InputType()
@@ -84,7 +87,7 @@ int InputFromConsole(ListP head, int type)
 		{
 		case 1:
 			for (i = 0; i < n; i++) {
-				printf("Input %d. element: ", i + 1);
+				printf("Input the %d. element: ", i + 1);
 				flag = scanf(" %d", &integer);
 				newElement = CreateElement(type, integer, NULL, 0, NULL);
 				InsertAfter(head, newElement);
@@ -92,7 +95,7 @@ int InputFromConsole(ListP head, int type)
 			break;
 		case 2:
 			for (i = 0; i < n; i++) {
-				printf("Input %d. element: ", i + 1);
+				printf("Input the %d. character: ", i + 1);
 				flag = scanf(" %c", &character);
 				newElement = CreateElement(type, 0, &character, 0, NULL);
 				InsertAfter(head, newElement);
@@ -100,7 +103,7 @@ int InputFromConsole(ListP head, int type)
 			break;
 		case 3:
 			for (i = 0; i < n; i++) {
-				printf("Input %d. element: ", i + 1);
+				printf("Input the %d. element: ", i + 1);
 				flag = scanf(" %lf", &doub);
 				newElement = CreateElement(type, 0, NULL, doub, NULL);
 				InsertAfter(head, newElement);
@@ -108,7 +111,7 @@ int InputFromConsole(ListP head, int type)
 			break;
 		case 4:
 			for (i = 0; i < n; i++) {
-				printf("Input %d. element: ", i + 1);
+				printf("Input the %d. string: ", i + 1);
 				flag = scanf(" %s", string);
 				newElement = CreateElement(type, 0, NULL, 0, string);
 				InsertAfter(head, newElement);
@@ -143,6 +146,7 @@ int InsertBefore(ListP head, ListP position, ListP newElement)
 
 }
 
+/*
 int SortedInput(ListP head, ListP newElement, int type)
 {
 	ListP temp = head;
@@ -178,6 +182,7 @@ int SortedInput(ListP head, ListP newElement, int type)
 	}
 	return EXIT_FAILURE;
 }
+*/
 
 int PrintList(ListP head, int type)
 {
@@ -187,7 +192,7 @@ int PrintList(ListP head, int type)
 	{
 	case 1:
 		while (temp->next != NULL) {
-			printf(" %d ", *((int*)(temp + 4)));
+			printf(" %d ", *(((int*)temp ) + 4));
 			temp = temp->next;
 		}
 		break;

@@ -4,7 +4,6 @@
 #include <ctype.h>
 #include "genericList.h"
 
-
 int main()
 {
 	List Head = { .next = NULL };
@@ -13,7 +12,6 @@ int main()
 
 	InputFromConsole(p, r);
 	PrintList(p, r);
-
 
 	return 0;
 }

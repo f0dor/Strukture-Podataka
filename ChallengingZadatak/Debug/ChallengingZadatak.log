@@ -1,10 +1,2 @@
 ﻿  genericList.c
-C:\Users\Marko Šimić\source\repos\ChallengingZadatak\genericList.c(159,76): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char'
-C:\Users\Marko Šimić\source\repos\ChallengingZadatak\genericList.c(159,44): warning C4024: 'strcmp': different types for formal and actual parameter 1
-C:\Users\Marko Šimić\source\repos\ChallengingZadatak\genericList.c(159,116): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char'
-C:\Users\Marko Šimić\source\repos\ChallengingZadatak\genericList.c(159,78): warning C4024: 'strcmp': different types for formal and actual parameter 2
-C:\Users\Marko Šimić\source\repos\ChallengingZadatak\genericList.c(171,75): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char'
-C:\Users\Marko Šimić\source\repos\ChallengingZadatak\genericList.c(171,43): warning C4024: 'strcmp': different types for formal and actual parameter 1
-C:\Users\Marko Šimić\source\repos\ChallengingZadatak\genericList.c(171,115): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char'
-C:\Users\Marko Šimić\source\repos\ChallengingZadatak\genericList.c(171,77): warning C4024: 'strcmp': different types for formal and actual parameter 2
   ChallengingZadatak.vcxproj -> C:\Users\Marko Šimić\source\repos\ChallengingZadatak\Debug\ChallengingZadatak.exe
