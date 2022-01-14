@@ -8,12 +8,12 @@
 #include "linkedList.h"
 #define SIZE 17
 
-int hashFunction(wchar_t letter)
+int HashFunction(wchar_t letter)
 {
 	return letter % SIZE;
 }
 
-HashTablePosition HashTableCreate(void)
+HashTablePosition HashTable_Create(void)
 {
 	HashTablePosition table = (HashTablePosition)malloc(sizeof(HashTable));
 	int i = 0;
@@ -23,18 +23,18 @@ HashTablePosition HashTableCreate(void)
 	}
 
 	for (i = 0; i < SIZE; i++) {
-		*((table->array) + i) = LinkedListCreate();
+		*((table->array) + i) = LinkedList_Create();
 	}
 
 	return table;
 }
 
-int HashTableDestroy(HashTablePosition table)
+int HashTable_Destroy(HashTablePosition table)
 {
 	int i = 0;
 
 	for (i = 0; i < SIZE; i++) {
-		LinkedListDestroy(*(table->array) + i);
+		LinkedList_Destroy(*(table->array) + i);
 	}
 
 	free(table);
@@ -44,4 +44,13 @@ int HashTableDestroy(HashTablePosition table)
 	} else {
 		return EXIT_FAILURE;
 	}
+}
+
+int HashTable_InsertLetter(HashTablePosition table, wchar_t letter)
+{
+	int index = HashFunction(letter);
+
+	LinkedList_SortedInput(*(table->array + index), letter);
+
+	return EXIT_SUCCESS;
 }

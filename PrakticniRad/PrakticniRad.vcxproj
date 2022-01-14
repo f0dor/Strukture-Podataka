@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dictionary.c" />
     <ClCompile Include="hashTable.c" />
     <ClCompile Include="linkedList.c" />
     <ClCompile Include="Source.c" />
     <ClCompile Include="trie.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dictionary.h" />
     <ClInclude Include="hashTable.h" />
     <ClInclude Include="linkedList.h" />
     <ClInclude Include="trie.h" />

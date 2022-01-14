@@ -12,10 +12,10 @@ typedef struct _HashTable {
 	ListNodePosition array[SIZE];
 } HashTable;
 
-int hashFunction(wchar_t letter);
-HashTablePosition HashTableCreate(void);
-int HashTableDestroy(HashTablePosition table);
+int HashFunction(wchar_t letter);
+HashTablePosition HashTable_Create(void);
+int HashTable_Destroy(HashTablePosition table);
+int HashTable_InsertLetter(HashTablePosition table, wchar_t letter);
 
 
 #endif // !HASH_TABLE_
-

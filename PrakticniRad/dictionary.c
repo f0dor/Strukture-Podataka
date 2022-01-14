@@ -6,12 +6,12 @@
 #include "trie.h"
 #include "hashTable.h"
 #include "linkedList.h"
+#include "dictionary.h"
 #define SIZE 17
+#define MAX_SIZE 1024
 
-TrieNodePosition Trie_Create(void)
+int InputFromFile(TrieNodePosition root)
 {
-	TrieNode p = { .current_Letter = "", .hashMap = NULL };
-	TrieNodePosition Root = &p;
+	char* buffer[MAX_SIZE] = { 0 };
 
-	return Root;
 }

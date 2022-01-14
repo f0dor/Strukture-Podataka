@@ -7,13 +7,14 @@
 #include "linkedList.h"
 #include "hashTable.h"
 #define SIZE 17
-
+#define MAX_SIZE 1024
 
 int main()
 {
-
 	char* locale;
 	locale = setlocale(LC_ALL, "");
+
+	TrieNodePosition root = Trie_Create();
 
 	return 0;
 }
