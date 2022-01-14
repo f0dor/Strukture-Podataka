@@ -1,0 +1,4 @@
+﻿  trie.c
+C:\Users\Marko Šimić\source\repos\PrakticniRad\trie.c(13,1): warning C4047: 'initializing': 'wchar_t' differs in levels of indirection from 'char [1]'
+C:\Users\Marko Šimić\source\repos\PrakticniRad\trie.c(16): warning C4172: returning address of local variable or temporary: p
+  PrakticniRad.vcxproj -> C:\Users\Marko Šimić\source\repos\PrakticniRad\Debug\PrakticniRad.exe

@@ -1,0 +1,6 @@
+﻿  Source.c
+C:\Users\Marko Šimić\source\repos\PrakticniRad\Source.c(11,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'size_t'
+C:\Users\Marko Šimić\source\repos\PrakticniRad\Source.c(11,9): message : consider using '%zd' in the format string
+  trie.c
+  Generating Code...
+  PrakticniRad.vcxproj -> C:\Users\Marko Šimić\source\repos\PrakticniRad\x64\Debug\PrakticniRad.exe
