@@ -10,8 +10,41 @@
 #define SIZE 17
 #define MAX_SIZE 1024
 
-int InputFromFile(TrieNodePosition root)
+int InputFromFile(TrieNodePosition root, char* fileName)
 {
-	char* buffer[MAX_SIZE] = { 0 };
+	FILE* file = NULL;
+	wchar_t name[MAX_SIZE] = { 0 };
+	wchar_t surname[MAX_SIZE] = { 0 };
+	wchar_t* name_surname = { 0 };
+	ListNodePosition* position = NULL;
 
+	int flag = 0;
+
+	file = fopen(fileName, "r");
+
+	if (!file) {
+		printf("File couldn't open!\n");
+		return -1;
+	}
+
+	while (!feof(file)) {
+		flag = fwscanf(file, L" %s %s", name, surname);
+		if (flag != 2) {
+			printf("Corrupt file!\n");
+			return -3;
+		}
+
+		name_surname = wcscat(name, L" ");
+		name_surname = wcscat(name_surname, surname);
+		
+		//PUSH THE NAME AND SURNAME TO A TRIE INPUT FUNCTION
+
+		Trie_InputPersonName(root, name_surname, position);
+	}
+	
+	free(name);
+	free(surname);
+	fclose(file);
+
+	return 0;
 }

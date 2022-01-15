@@ -15,4 +15,8 @@ typedef struct _TrieNode {
 
 TrieNodePosition Trie_Create(void);
 TrieNodePosition Trie_Destroy(TrieNodePosition root);
+
+TrieNodePosition Trie_CreateTrieNode(wchar_t letter);
+
+int Trie_InputPersonName(TrieNodePosition root, char* name_surname, ListNodePosition* position);
 #endif // !TRIES

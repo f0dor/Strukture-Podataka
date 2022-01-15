@@ -1,16 +1,3 @@
 ﻿  dictionary.c
-  hashTable.c
-  linkedList.c
-C:\Users\Marko Šimić\source\repos\PrakticniRad\linkedList.c(30,28): warning C4047: 'function': 'wchar_t *' differs in levels of indirection from 'wchar_t'
-C:\Users\Marko Šimić\source\repos\PrakticniRad\linkedList.c(30,20): warning C4024: 'wcscpy': different types for formal and actual parameter 1
-C:\Users\Marko Šimić\source\repos\PrakticniRad\linkedList.c(30,36): warning C4047: 'function': 'const wchar_t *' differs in levels of indirection from 'wchar_t'
-C:\Users\Marko Šimić\source\repos\PrakticniRad\linkedList.c(30,30): warning C4024: 'wcscpy': different types for formal and actual parameter 2
-C:\Users\Marko Šimić\source\repos\PrakticniRad\linkedList.c(77,19): warning C4047: '=': 'ListNodePosition *' differs in levels of indirection from 'ListNodePosition'
-  Source.c
-  trie.c
-C:\Users\Marko Šimić\source\repos\PrakticniRad\trie.c(13,1): warning C4047: 'initializing': 'wchar_t' differs in levels of indirection from 'char [1]'
-  Generating Code...
-C:\Users\Marko Šimić\source\repos\PrakticniRad\trie.c(16): warning C4172: returning address of local variable or temporary: p
-C:\Users\Marko Šimić\source\repos\PrakticniRad\linkedList.c(16): warning C4172: returning address of local variable or temporary: p
-C:\Users\Marko Šimić\source\repos\PrakticniRad\dictionary.c(16): warning C4716: 'InputFromFile': must return a value
+C:\Users\Marko Šimić\source\repos\PrakticniRad\dictionary.c(43): warning C4715: 'InputFromFile': not all control paths return a value
   PrakticniRad.vcxproj -> C:\Users\Marko Šimić\source\repos\PrakticniRad\Debug\PrakticniRad.exe

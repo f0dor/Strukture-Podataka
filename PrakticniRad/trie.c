@@ -6,7 +6,6 @@
 #include "trie.h"
 #include "hashTable.h"
 #include "linkedList.h"
-#define SIZE 17
 
 TrieNodePosition Trie_Create(void)
 {
@@ -14,4 +13,31 @@ TrieNodePosition Trie_Create(void)
 	TrieNodePosition Root = &p;
 
 	return Root;
+}
+
+TrieNodePosition Trie_CreateTrieNode(wchar_t letter)
+{
+	TrieNodePosition newTrieNode = NULL;
+
+	newTrieNode = (TrieNodePosition)malloc(sizeof(TrieNode));
+
+	if (!newTrieNode) {
+		perror("Can't allocate memory!\n");
+		return NULL;
+	}
+	wcscpy(newTrieNode->current_Letter, letter);
+	*(newTrieNode->hashMap) = HashTable_Create();
+
+	return newTrieNode;
+}
+
+int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname, ListNodePosition* position)
+{
+	TrieNodePosition temp = root;
+	size_t string_length = wcslen(name_surname);
+	ListNodePosition* position = NULL;
+	int i = 0;
+
+	
+
 }

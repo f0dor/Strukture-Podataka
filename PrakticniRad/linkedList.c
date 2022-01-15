@@ -10,7 +10,7 @@
 
 ListNodePosition LinkedList_Create(void)
 {
-	ListNode p = { .letter = 0, .next_index = NULL, .next_letter = NULL};
+	ListNode p = { .letter = 0, .next_index = NULL, .next_letter = NULL, .next = NULL};
 	ListNodePosition Head = &p;
 
 	return Head;
@@ -55,15 +55,18 @@ int LinkedList_Destroy(ListNodePosition head)
 	return 0;
 }
 
-int LinkedList_SortedInput(ListNodePosition head, wchar_t letter)
+int LinkedList_SortedInput(ListNodePosition head, wchar_t letter, ListNodePosition* position)
 {
 	ListNodePosition temp = head;
+	ListNodePosition* p = NULL;
 
 	while ((temp->next_index != NULL) && (letter > temp->next_index->letter)) {
 		temp = temp->next_index;
 	}
 
-	LinkedList_InsertAfter(temp, LinkedList_CreateListNode(letter));
+	LinkedList_InsertAfter(temp, p = LinkedList_CreateListNode(letter));
+
+	position = p;
 
 	if (temp->next_index == NULL) {
 		return 2;

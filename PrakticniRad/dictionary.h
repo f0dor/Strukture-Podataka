@@ -6,6 +6,6 @@
 #include "hashTable.h"
 #include "linkedList.h"
 
-int InputFromFile(TrieNodePosition root);
+int InputFromFile(TrieNodePosition root, char* fileName);
 
 #endif // !DICTIONARY_

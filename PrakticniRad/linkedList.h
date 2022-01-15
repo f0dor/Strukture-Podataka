@@ -20,13 +20,12 @@ ListNodePosition LinkedList_Create(void);
 ListNodePosition LinkedList_CreateListNode(wchar_t letter);
 int LinkedList_Destroy(ListNodePosition head);
 
-int LinkedList_SortedInput(ListNodePosition head, wchar_t letter);
+int LinkedList_SortedInput(ListNodePosition head, wchar_t letter, ListNodePosition* position);
 int LinkedList_CheckLetter(ListNodePosition head, wchar_t letter, ListNodePosition* position);
 
 // AUXILIARY FUNCTIONS
 
 int LinkedList_InsertAfter(ListNodePosition position, ListNodePosition newListNode);
 int LinkedList_InsertBefore(ListNodePosition head, ListNodePosition position, ListNodePosition newListNode);
-
 
 #endif // !LINKED_LISTS_
