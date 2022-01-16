@@ -1,3 +1,4 @@
-﻿  dictionary.c
-C:\Users\Marko Šimić\source\repos\PrakticniRad\dictionary.c(43): warning C4715: 'InputFromFile': not all control paths return a value
+﻿  trie.c
+C:\Users\Marko Šimić\source\repos\PrakticniRad\trie.c(44,62): warning C4047: '=': 'ListNodePosition *' differs in levels of indirection from 'TrieNodePosition'
+C:\Users\Marko Šimić\source\repos\PrakticniRad\trie.c(15): warning C4172: returning address of local variable or temporary: p
   PrakticniRad.vcxproj -> C:\Users\Marko Šimić\source\repos\PrakticniRad\Debug\PrakticniRad.exe

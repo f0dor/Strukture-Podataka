@@ -15,6 +15,6 @@ typedef struct _HashTable {
 int HashFunction(wchar_t letter);
 HashTablePosition HashTable_Create(void);
 int HashTable_Destroy(HashTablePosition table);
-int HashTable_InsertLetter(HashTablePosition table, wchar_t letter, ListNodePosition* position);
+int HashTable_InsertLetter(HashTablePosition table, wchar_t* letter, ListNodePosition* position);
 
 #endif // !HASH_TABLE_

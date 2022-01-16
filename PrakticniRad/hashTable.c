@@ -46,11 +46,11 @@ int HashTable_Destroy(HashTablePosition table)
 	}
 }
 
-int HashTable_InsertLetter(HashTablePosition table, wchar_t letter, ListNodePosition* position)
+int HashTable_InsertLetter(HashTablePosition table, wchar_t* letter, ListNodePosition* position)
 {
 	int index = HashFunction(letter);
 
-	LinkedList_SortedInput(*(table->array + index), letter, position);
+	LinkedList_SortedInputNextIndex(*(table->array + index), letter, position);
 
 	return EXIT_SUCCESS;
 }

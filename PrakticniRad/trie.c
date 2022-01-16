@@ -9,13 +9,13 @@
 
 TrieNodePosition Trie_Create(void)
 {
-	TrieNode p = { .current_Letter = "", .hashMap = NULL };
+	TrieNode p = { .current_Letter = L"", .hashMap = NULL };
 	TrieNodePosition Root = &p;
 
 	return Root;
 }
 
-TrieNodePosition Trie_CreateTrieNode(wchar_t letter)
+TrieNodePosition Trie_CreateTrieNode(wchar_t *letter)
 {
 	TrieNodePosition newTrieNode = NULL;
 
@@ -35,9 +35,14 @@ int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname, ListNodeP
 {
 	TrieNodePosition temp = root;
 	size_t string_length = wcslen(name_surname);
-	ListNodePosition* position = NULL;
-	int i = 0;
+	unsigned int i = 0;
+	name_surname = _wcsupr(name_surname);
 
-	
+	for (i; i < string_length; i++) {
+		HashTable_InsertLetter(*(temp->hashMap), &(*(name_surname + i)), position);
+		i++; LinkedList_SortedInputNextIndex(*position, &(*(name_surname + i)), position);
+		i++; *(position->next) = Trie_CreateTrieNode(&(*(name_surname + i)));
+	}
 
+	return 0;
 }

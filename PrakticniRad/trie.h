@@ -9,14 +9,14 @@ typedef struct _TrieNode* TrieNodePosition;
 #include "hashTable.h"
 
 typedef struct _TrieNode {
-	wchar_t	current_Letter;
+	wchar_t* current_Letter;
 	HashTablePosition hashMap[SIZE];
 } TrieNode;
 
 TrieNodePosition Trie_Create(void);
 TrieNodePosition Trie_Destroy(TrieNodePosition root);
 
-TrieNodePosition Trie_CreateTrieNode(wchar_t letter);
+TrieNodePosition Trie_CreateTrieNode(wchar_t* letter);
 
-int Trie_InputPersonName(TrieNodePosition root, char* name_surname, ListNodePosition* position);
+int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname, ListNodePosition* position);
 #endif // !TRIES

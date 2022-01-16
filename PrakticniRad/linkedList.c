@@ -16,7 +16,7 @@ ListNodePosition LinkedList_Create(void)
 	return Head;
 }
 
-ListNodePosition LinkedList_CreateListNode(wchar_t letter)
+ListNodePosition LinkedList_CreateListNode(wchar_t* letter)
 {
 	ListNodePosition newListNode = NULL;
 
@@ -55,18 +55,18 @@ int LinkedList_Destroy(ListNodePosition head)
 	return 0;
 }
 
-int LinkedList_SortedInput(ListNodePosition head, wchar_t letter, ListNodePosition* position)
+int LinkedList_SortedInputNextIndex(ListNodePosition head, wchar_t* letter, ListNodePosition* position)
 {
 	ListNodePosition temp = head;
-	ListNodePosition* p = NULL;
+	ListNodePosition p = NULL;
 
-	while ((temp->next_index != NULL) && (letter > temp->next_index->letter)) {
+	while ((temp->next_index != NULL) && (letter > (int)temp->next_index->letter)) {
 		temp = temp->next_index;
 	}
 
-	LinkedList_InsertAfter(temp, p = LinkedList_CreateListNode(letter));
+	LinkedList_InsertAfterNextIndex(temp, p = LinkedList_CreateListNode(letter));
 
-	position = p;
+	position = &p;
 
 	if (temp->next_index == NULL) {
 		return 2;
@@ -75,13 +75,34 @@ int LinkedList_SortedInput(ListNodePosition head, wchar_t letter, ListNodePositi
 	}
 }
 
-int LinkedList_CheckLetter(ListNodePosition head, wchar_t letter, ListNodePosition* position)
+int LinkedList_SortedInputNextLetter(ListNodePosition head, wchar_t* letter, ListNodePosition* position)
+{
+	ListNodePosition temp = head;
+	ListNodePosition p = NULL;
+
+	while ((temp->next_letter != NULL) && (wcscmp(letter, temp->next_letter->letter) > 0)) {
+		temp = temp->next_letter;
+	}
+
+	LinkedList_InsertAfterNextLetter(temp, p = LinkedList_CreateListNode(letter));
+
+	position = &p;
+
+	if (temp->next_letter == NULL) {
+		return 2;
+	}
+	else {
+		return 1;
+	}
+}
+
+int LinkedList_CheckLetter(ListNodePosition head, wchar_t* letter, ListNodePosition* position)
 {
 	ListNodePosition temp = head;
 
 	while (temp->next_index != NULL) {
 		if (temp->letter == letter) {
-			position = temp;
+			position = &temp;
 			return 1; // IF THE LETTER EXISTS IN THE LINKED LIST, RETURN 1
 		}
 		temp = temp->next_index;
@@ -90,10 +111,18 @@ int LinkedList_CheckLetter(ListNodePosition head, wchar_t letter, ListNodePositi
 	return 0; // ELSE, RETURN 0!
 }
 
-int LinkedList_InsertAfter(ListNodePosition position, ListNodePosition newListNode)
+int LinkedList_InsertAfterNextIndex(ListNodePosition position, ListNodePosition newListNode)
 {
 	newListNode->next_index = position->next_index;
 	position->next_index = newListNode;
+
+	return EXIT_SUCCESS;
+}
+
+int LinkedList_InsertAfterNextLetter(ListNodePosition position, ListNodePosition newListNode)
+{
+	newListNode->next_letter = position->next_letter;
+	position->next_letter = newListNode;
 
 	return EXIT_SUCCESS;
 }
@@ -106,7 +135,7 @@ int LinkedList_InsertBefore(ListNodePosition head, ListNodePosition position, Li
 		temp = temp->next_index;
 	}
 
-	LinkedList_InsertAfter(temp, newListNode);
+	LinkedList_InsertAfterNextIndex(temp, newListNode);
 
 	return EXIT_SUCCESS;
 }
