@@ -12,7 +12,7 @@ typedef struct _ListNode {
 	wchar_t* letter;
 	ListNodePosition next_index;
 	ListNodePosition next_letter;
-	TrieNodePosition next;
+	TrieNodePosition next_trieNode;
 } ListNode;
 
 // CREATE AND DESTROY FUNCTIONS

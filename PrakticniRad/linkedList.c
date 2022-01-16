@@ -10,7 +10,7 @@
 
 ListNodePosition LinkedList_Create(void)
 {
-	ListNode p = { .letter = 0, .next_index = NULL, .next_letter = NULL, .next = NULL};
+	ListNode p = { .letter = 0, .next_index = NULL, .next_letter = NULL, .next_trieNode = NULL};
 	ListNodePosition Head = &p;
 
 	return Head;
