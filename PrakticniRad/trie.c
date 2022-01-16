@@ -41,7 +41,7 @@ int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname, ListNodeP
 	for (i; i < string_length; i++) {
 		HashTable_InsertLetter(*(temp->hashMap), &(*(name_surname + i)), position);
 		i++; LinkedList_SortedInputNextIndex(*position, &(*(name_surname + i)), position);
-		i++; *(position->next) = Trie_CreateTrieNode(&(*(name_surname + i)));
+		i++; *(position)->next = Trie_CreateTrieNode(&(*(name_surname + i)));
 	}
 
 	return 0;
