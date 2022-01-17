@@ -16,8 +16,6 @@ int InputFromFile(TrieNodePosition root, char* fileName)
 	wchar_t name[MAX_SIZE] = { 0 };
 	wchar_t surname[MAX_SIZE] = { 0 };
 	wchar_t* name_surname = { 0 };
-	ListNodePosition* position = NULL;
-
 	int flag = 0;
 
 	file = fopen(fileName, "r");
@@ -31,6 +29,7 @@ int InputFromFile(TrieNodePosition root, char* fileName)
 		flag = fwscanf(file, L" %s %s", name, surname);
 		if (flag != 2) {
 			printf("Corrupt file!\n");
+			fclose(file);
 			return -3;
 		}
 
@@ -39,11 +38,9 @@ int InputFromFile(TrieNodePosition root, char* fileName)
 		
 		//PUSH THE NAME AND SURNAME TO A TRIE INPUT FUNCTION
 
-		Trie_InputPersonName(root, name_surname, position);
+		Trie_InputPersonName(root, name_surname);
 	}
 	
-	free(name);
-	free(surname);
 	fclose(file);
 
 	return 0;

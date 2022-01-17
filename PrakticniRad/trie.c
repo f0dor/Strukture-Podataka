@@ -9,10 +9,18 @@
 
 TrieNodePosition Trie_Create(void)
 {
-	TrieNode p = { .current_Letter = L"", .hashMap = NULL };
-	TrieNodePosition Root = &p;
+	TrieNodePosition root = NULL;
+	root = (TrieNodePosition)malloc(sizeof(TrieNode));
 
-	return Root;
+	if (!root) {
+		perror("Can't allocate memory!\n");
+		return NULL;
+	}
+
+	root->current_Letter = L"";
+	*(root->hashMap) = HashTable_Create();
+
+	return root;
 }
 
 TrieNodePosition Trie_CreateTrieNode(wchar_t *letter)
@@ -31,17 +39,20 @@ TrieNodePosition Trie_CreateTrieNode(wchar_t *letter)
 	return newTrieNode;
 }
 
-int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname, ListNodePosition* position)
+int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname)
 {
 	TrieNodePosition temp = root;
 	size_t string_length = wcslen(name_surname);
 	unsigned int i = 0;
 	name_surname = _wcsupr(name_surname);
+	ListNodePosition* p = NULL;
 
 	for (i; i < string_length; i++) {
-		HashTable_InsertLetter(*(temp->hashMap), &(*(name_surname + i)), position);
-		i++; LinkedList_SortedInputNextIndex(*position, &(*(name_surname + i)), position);
-		i++; *(position)->nextTrieNode = Trie_CreateTrieNode(&(*(name_surname + i)));
+		HashTable_InsertLetter(*(temp->hashMap), &(*(name_surname + i)), p);
+		if (i++ >= string_length) { break; }
+		i++; LinkedList_SortedInputNextLetter(*p, &(*(name_surname + i)), p);
+		if (i++ >= string_length) { break; }
+		i++; (*(p))->next_trieNode = Trie_CreateTrieNode(&(*(name_surname + i)));
 	}
 
 	return 0;

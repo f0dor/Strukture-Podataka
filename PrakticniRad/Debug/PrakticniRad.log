@@ -1,4 +1,4 @@
-﻿  trie.c
-C:\Users\Marko Šimić\source\repos\PrakticniRad\trie.c(44,62): warning C4047: '=': 'ListNodePosition *' differs in levels of indirection from 'TrieNodePosition'
-C:\Users\Marko Šimić\source\repos\PrakticniRad\trie.c(15): warning C4172: returning address of local variable or temporary: p
+﻿  hashTable.c
+C:\Users\Marko Šimić\source\repos\PrakticniRad\hashTable.c(54,76): warning C4047: 'function': 'ListNodePosition *' differs in levels of indirection from 'ListNodePosition'
+C:\Users\Marko Šimić\source\repos\PrakticniRad\hashTable.c(54,67): warning C4024: 'LinkedList_SortedInputNextIndex': different types for formal and actual parameter 3
   PrakticniRad.vcxproj -> C:\Users\Marko Šimić\source\repos\PrakticniRad\Debug\PrakticniRad.exe

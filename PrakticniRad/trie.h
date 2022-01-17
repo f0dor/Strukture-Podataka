@@ -18,5 +18,5 @@ TrieNodePosition Trie_Destroy(TrieNodePosition root);
 
 TrieNodePosition Trie_CreateTrieNode(wchar_t* letter);
 
-int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname, ListNodePosition* position);
+int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname);
 #endif // !TRIES

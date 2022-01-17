@@ -9,7 +9,7 @@ typedef struct _ListNode* ListNodePosition;
 #include "hashTable.h"
 
 typedef struct _ListNode {
-	wchar_t* letter;
+	wchar_t letter;
 	ListNodePosition next_index;
 	ListNodePosition next_letter;
 	TrieNodePosition next_trieNode;

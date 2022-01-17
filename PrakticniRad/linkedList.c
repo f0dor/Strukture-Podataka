@@ -10,10 +10,20 @@
 
 ListNodePosition LinkedList_Create(void)
 {
-	ListNode p = { .letter = 0, .next_index = NULL, .next_letter = NULL, .next_trieNode = NULL};
-	ListNodePosition Head = &p;
+	ListNodePosition head = NULL;
+	head = (ListNodePosition)malloc(sizeof(ListNode));
 
-	return Head;
+	if (!head) {
+		perror("Can't allocate memory!\n");
+		return NULL;
+	}
+
+	head->letter = (wchar_t)L"";
+	head->next_index = NULL;
+	head->next_letter = NULL;
+	head->next_trieNode = NULL;
+
+	return head;
 }
 
 ListNodePosition LinkedList_CreateListNode(wchar_t* letter)
@@ -27,7 +37,7 @@ ListNodePosition LinkedList_CreateListNode(wchar_t* letter)
 		return NULL;
 	}
 
-	wcscpy(newListNode->letter, letter);
+	wcscpy(&(newListNode->letter), letter);
 	newListNode->next_index = NULL;
 	newListNode->next_letter = NULL;
 	
@@ -60,7 +70,7 @@ int LinkedList_SortedInputNextIndex(ListNodePosition head, wchar_t* letter, List
 	ListNodePosition temp = head;
 	ListNodePosition p = NULL;
 
-	while ((temp->next_index != NULL) && (letter > (int)temp->next_index->letter)) {
+	while ((temp->next_index != NULL) && (wcscmp(letter, &(temp->next_index->letter)) > 0)) {
 		temp = temp->next_index;
 	}
 
@@ -80,7 +90,7 @@ int LinkedList_SortedInputNextLetter(ListNodePosition head, wchar_t* letter, Lis
 	ListNodePosition temp = head;
 	ListNodePosition p = NULL;
 
-	while ((temp->next_letter != NULL) && (wcscmp(letter, temp->next_letter->letter) > 0)) {
+	while ((temp->next_letter != NULL) && (wcscmp(letter, &(temp->next_letter->letter)) > 0)) {
 		temp = temp->next_letter;
 	}
 
@@ -101,7 +111,7 @@ int LinkedList_CheckLetter(ListNodePosition head, wchar_t* letter, ListNodePosit
 	ListNodePosition temp = head;
 
 	while (temp->next_index != NULL) {
-		if (temp->letter == letter) {
+		if (temp->letter == *letter) {
 			position = &temp;
 			return 1; // IF THE LETTER EXISTS IN THE LINKED LIST, RETURN 1
 		}
