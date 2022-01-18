@@ -9,7 +9,7 @@ typedef struct _TrieNode* TrieNodePosition;
 #include "hashTable.h"
 
 typedef struct _TrieNode {
-	wchar_t* current_Letter;
+	wchar_t current_Letter;
 	HashTablePosition hashMap[SIZE];
 } TrieNode;
 

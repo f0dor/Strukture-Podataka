@@ -17,8 +17,9 @@ TrieNodePosition Trie_Create(void)
 		return NULL;
 	}
 
-	root->current_Letter = L"";
-	*(root->hashMap) = HashTable_Create();
+	root->current_Letter = 0;
+	// *root->hashMap = HashTable_Create();
+
 
 	return root;
 }
@@ -33,7 +34,7 @@ TrieNodePosition Trie_CreateTrieNode(wchar_t *letter)
 		perror("Can't allocate memory!\n");
 		return NULL;
 	}
-	wcscpy(newTrieNode->current_Letter, letter);
+	wcscpy(&(newTrieNode->current_Letter), letter);
 	*(newTrieNode->hashMap) = HashTable_Create();
 
 	return newTrieNode;
@@ -45,14 +46,15 @@ int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname)
 	size_t string_length = wcslen(name_surname);
 	unsigned int i = 0;
 	name_surname = _wcsupr(name_surname);
-	ListNodePosition* p = NULL;
+	ListNodePosition p = NULL;
 
 	for (i; i < string_length; i++) {
-		HashTable_InsertLetter(*(temp->hashMap), &(*(name_surname + i)), p);
-		if (i++ >= string_length) { break; }
-		i++; LinkedList_SortedInputNextLetter(*p, &(*(name_surname + i)), p);
-		if (i++ >= string_length) { break; }
-		i++; (*(p))->next_trieNode = Trie_CreateTrieNode(&(*(name_surname + i)));
+		HashTable_InsertLetter(*(temp->hashMap), &(*(name_surname + i)), &p);
+		if ( (i + 1) >= string_length) { break; }
+		i++; LinkedList_SortedInputNextLetter(p, &(*(name_surname + i)), &p);
+		if ( (i + 1) >= string_length) { break; }
+		i++; p->next_trieNode = Trie_CreateTrieNode(&(*(name_surname + i)));
+		temp = p->next_trieNode;
 	}
 
 	return 0;

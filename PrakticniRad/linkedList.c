@@ -18,7 +18,7 @@ ListNodePosition LinkedList_Create(void)
 		return NULL;
 	}
 
-	head->letter = (wchar_t)L"";
+	head->letter = 0;
 	head->next_index = NULL;
 	head->next_letter = NULL;
 	head->next_trieNode = NULL;
@@ -76,7 +76,7 @@ int LinkedList_SortedInputNextIndex(ListNodePosition head, wchar_t* letter, List
 
 	LinkedList_InsertAfterNextIndex(temp, p = LinkedList_CreateListNode(letter));
 
-	position = &p;
+	*position = p;
 
 	if (temp->next_index == NULL) {
 		return 2;
@@ -96,7 +96,7 @@ int LinkedList_SortedInputNextLetter(ListNodePosition head, wchar_t* letter, Lis
 
 	LinkedList_InsertAfterNextLetter(temp, p = LinkedList_CreateListNode(letter));
 
-	position = &p;
+	*position = p;
 
 	if (temp->next_letter == NULL) {
 		return 2;
