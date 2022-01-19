@@ -3,6 +3,8 @@
 #include <string.h>
 #include <locale.h>
 #include <wchar.h>
+#include <time.h>
+#include <Windows.h>
 #include "trie.h"
 #include "hashTable.h"
 #include "linkedList.h"
@@ -26,7 +28,7 @@ int InputFromFile(TrieNodePosition root, char* fileName)
 	}
 
 	while (!feof(file)) {
-		flag = fwscanf(file, L" %s %s", name, surname);
+		flag = fwscanf(file, L" %ws %ws\n", name, surname);
 		if (flag != 2) {
 			printf("Corrupt file!\n");
 			fclose(file);
@@ -41,7 +43,33 @@ int InputFromFile(TrieNodePosition root, char* fileName)
 		Trie_InputPersonName(root, name_surname);
 	}
 	
+	printf("All names successfully input!\n");
 	fclose(file);
 
 	return 0;
+}
+
+void MeasureMemoryUsage() {
+	MEMORYSTATUSEX memInfo;
+	unsigned int size = 0;
+	memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+	GlobalMemoryStatusEx(&memInfo);
+	DWORDLONG totalVirtualMem = memInfo.ullTotalPageFile;
+	DWORDLONG totalPhysMem = memInfo.ullTotalPhys;
+	size = (unsigned int)totalPhysMem;
+	size = size / 1024;
+	printf("%d KB of used memory!\n", size);
+	size = size / 1024;
+	printf("%d MB of used memory!\n", size);
+}
+
+long StartTimer() {
+	clock_t begin = clock();
+	return begin;
+}
+
+void EndTimer(long a) {
+	clock_t end = clock();
+	double time_spent = (double)(end - a) / CLOCKS_PER_SEC;
+	printf("Elapsed time = %lf miliseconds\n", time_spent);
 }

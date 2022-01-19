@@ -37,7 +37,9 @@ ListNodePosition LinkedList_CreateListNode(wchar_t* letter)
 		return NULL;
 	}
 
-	wcscpy(&(newListNode->letter), letter);
+	newListNode->letter = (wchar_t)L"";
+	// wcscpy(&(newListNode->letter), letter);
+	(newListNode->letter) = *letter;
 	newListNode->next_index = NULL;
 	newListNode->next_letter = NULL;
 	
@@ -69,19 +71,22 @@ int LinkedList_SortedInputNextIndex(ListNodePosition head, wchar_t* letter, List
 {
 	ListNodePosition temp = head;
 	ListNodePosition p = NULL;
-
-	while ((temp->next_index != NULL) && (wcscmp(letter, &(temp->next_index->letter)) > 0)) {
+	
+	while ((temp->next_index != NULL) && ((unsigned int)letter[0] < (unsigned int)temp->next_index->letter)) {
 		temp = temp->next_index;
 	}
 
-	LinkedList_InsertAfterNextIndex(temp, p = LinkedList_CreateListNode(letter));
-
-	*position = p;
-
 	if (temp->next_index == NULL) {
+		LinkedList_InsertAfterNextIndex(temp, p = LinkedList_CreateListNode(letter));
+		*position = p;
+		return 0;
+	} else if ((unsigned int)letter[0] == (unsigned int)temp->next_index->letter){
+		*position = temp->next_index;
 		return 2;
 	} else {
-		return 1;
+		LinkedList_InsertAfterNextIndex(temp->next_index, p = LinkedList_CreateListNode(letter));
+		*position = p;
+		return 0;
 	}
 }
 
@@ -90,19 +95,21 @@ int LinkedList_SortedInputNextLetter(ListNodePosition head, wchar_t* letter, Lis
 	ListNodePosition temp = head;
 	ListNodePosition p = NULL;
 
-	while ((temp->next_letter != NULL) && (wcscmp(letter, &(temp->next_letter->letter)) > 0)) {
+	while ((temp->next_letter != NULL) && ((unsigned int)letter[0] < (unsigned int)temp->next_letter->letter)) {
 		temp = temp->next_letter;
 	}
 
-	LinkedList_InsertAfterNextLetter(temp, p = LinkedList_CreateListNode(letter));
-
-	*position = p;
-
 	if (temp->next_letter == NULL) {
+		LinkedList_InsertAfterNextLetter(temp, p = LinkedList_CreateListNode(letter));
+		*position = p;
+		return 0;
+	} else if ((unsigned int)letter[0] == (unsigned int)temp->next_letter->letter) {
+		*position = temp->next_letter;
 		return 2;
-	}
-	else {
-		return 1;
+	} else {
+		LinkedList_InsertAfterNextLetter(temp->next_letter, p = LinkedList_CreateListNode(letter));
+		*position = p;
+		return 0;
 	}
 }
 

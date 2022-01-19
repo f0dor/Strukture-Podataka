@@ -18,7 +18,7 @@ TrieNodePosition Trie_Create(void)
 	}
 
 	root->current_Letter = 0;
-	// *root->hashMap = HashTable_Create();
+	*root->hashMap = HashTable_Create();
 
 
 	return root;

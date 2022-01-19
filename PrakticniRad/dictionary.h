@@ -7,5 +7,8 @@
 #include "linkedList.h"
 
 int InputFromFile(TrieNodePosition root, char* fileName);
+void MeasureMemoryUsage();
+long StartTimer();
+void EndTimer(long a);
 
 #endif // !DICTIONARY_

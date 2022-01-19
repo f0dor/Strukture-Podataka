@@ -23,7 +23,7 @@ HashTablePosition HashTable_Create(void)
 	}
 
 	for (i = 0; i < SIZE; i++) {
-		*((table->array) + i) = LinkedList_Create();
+		table->array[i] = LinkedList_Create();
 	}
 
 	return table;
