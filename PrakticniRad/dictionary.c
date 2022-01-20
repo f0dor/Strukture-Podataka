@@ -71,5 +71,5 @@ long StartTimer() {
 void EndTimer(long a) {
 	clock_t end = clock();
 	double time_spent = (double)(end - a) / CLOCKS_PER_SEC;
-	printf("Elapsed time = %lf miliseconds\n", time_spent);
+	printf("Elapsed time = %lf miliseconds\n", time_spent * 1000);
 }

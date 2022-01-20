@@ -56,6 +56,5 @@ int Trie_InputPersonName(TrieNodePosition root, wchar_t* name_surname)
 		i++; p->next_trieNode = Trie_CreateTrieNode(&(*(name_surname + i)));
 		temp = p->next_trieNode;
 	}
-
 	return 0;
 }

@@ -34,7 +34,8 @@ int HashTable_Destroy(HashTablePosition table)
 	int i = 0;
 
 	for (i = 0; i < SIZE; i++) {
-		LinkedList_Destroy(*(table->array) + i);
+		// LinkedList_Destroy(*(table->array) + i);
+		LinkedList_Destroy(table->array[i]);
 	}
 
 	free(table);
